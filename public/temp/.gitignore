@@ -1,4 +1,3 @@
- 
 # Logs
 logs
 *.log
@@ -42,7 +41,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-
+C:\Users\asus\OneDrive\Desktop\BACKEND_PROJECT\node_modules/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
