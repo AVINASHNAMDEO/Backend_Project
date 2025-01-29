@@ -1,3 +1,47 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: './env' });
+import connectDB from "./db/index.js";
+
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(`server is running at port : ${process.env.PORT}`);
+        
+    })
+})
+.catch((error)=>{
+console.log("MongoDB connection failed !! ", err);
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import dotenv from 'dotenv'
 // require('dotenv').config()
 // import dotenv from 'dotenv';
@@ -6,11 +50,7 @@
 // // require('dotenv').config({path:'./env'})
 // const dotenv = require('dotenv');
 // dotenv.config({ path: './env' });
-import dotenv from 'dotenv';
-dotenv.config({ path: './env' });
-import connectDB from "./db/index.js";
 
-connectDB()
 
 // dotenv.config({
 //     path : './env'
