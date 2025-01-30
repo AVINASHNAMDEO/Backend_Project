@@ -1,6 +1,7 @@
-const app = require('express')
-var cors = require('cors')
-const cookieparser = require('cookie-parser')
+import express from 'express'
+ const app = express()
+import cors from "cors"
+import cookieparser from "cookie-parser"
 
 app.use(cors({
     origin : process.env.CORS_ORIGIN,
@@ -15,5 +16,17 @@ app.use(express.static("public"))
 
 app.use(cookieparser())
 
- 
+
+
+
+
+// routes 
+import userRouter from './routes/user.routes.js'
+
+ //routes declaration
+
+ app.use("/api/v1/users",userRouter)
+
+ // http://localhost:8000/api/v1/users/register
+
 export {app}
