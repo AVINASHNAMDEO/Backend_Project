@@ -1,6 +1,6 @@
 import mongoose , {Schema} from "mongoose";   
-import { JsonWebTokenError } from "jsonwebtoken";
-import bcrypt from "bcryptjs"
+import  JsonWebTokenError  from "jsonwebtoken";
+import bcrypt from "bcrypt"
 
 const userSchema = new Schema({
     username : {
@@ -27,7 +27,7 @@ const userSchema = new Schema({
     },
     avatar : {
         type : String ,// cloudary url
-        required : true
+        default : "/images.png"
 
      },
      coverImage : {
@@ -48,17 +48,46 @@ const userSchema = new Schema({
     }
 },{timestamps: true})
 
-userSchema.pre("save",async function(next){
-    if(!this.isModified("password")){
-        return next()
-    }
-    this.password = await bcrypt.hash(this.password , 10)
-    next()
-})
+// userSchema.pre("save",async function(next){
+//     if(!this.isModified("password")){
+//         return next()
+//     }
+//     this.password =  await bcrypt.hash(this.password , 10)
+//     next()
+// })
 
-userSchema.methods.comparePassword = async function(password){
-    return await bcrypt.compare(password , this.password)
-}
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+    try {
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+
+
+
+
+// userSchema.methods.comparePassword = async function(password){
+//     return await bcrypt.compare(password , this.password)
+// }
+
+// Method to compare passwords
+userSchema.methods.comparePassword = async function (inputPassword) {
+    try {
+        return await bcrypt.compare(inputPassword, this.password);
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+
+
+
 
 userSchema.methods.generateAccesssToken = function(){
     JsonWebTokenError.sign({

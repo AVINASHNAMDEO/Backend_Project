@@ -2,6 +2,11 @@ import express from 'express'
  const app = express()
 import cors from "cors"
 import cookieparser from "cookie-parser"
+import dotenv from 'dotenv'
+
+dotenv.config({
+    path : './.env'
+})
 
 app.use(cors({
     origin : process.env.CORS_ORIGIN,
